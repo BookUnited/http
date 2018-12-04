@@ -2,7 +2,7 @@
 
 namespace BookUnited\Http;
 
-use BookUnited\Http\Middleware\MiddlewareInterface;
+use BookUnited\Http\Middlewares\MiddlewareInterface;
 
 interface ClientInterface
 {
