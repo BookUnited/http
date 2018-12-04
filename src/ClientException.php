@@ -23,12 +23,10 @@ class ClientException extends Exception
         parent::__construct($message);
     }
 
-
     /**
-     * @param array $errors
      * @return array
      */
-    public function getErrors(array $errors): array
+    public function getErrors(): array
     {
        return $this->errors;
     }
