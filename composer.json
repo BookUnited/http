@@ -1,0 +1,21 @@
+{
+    "name": "bookunited/http",
+    "description": "Http client for communication between the services",
+    "tags": ["BookUnited", "Http", "Client"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jeffrey Buitenhuis",
+            "email": "jeffrey@onemustcode.nl"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "BookUnited\\Http\\": "src/"
+        }
+    }
+}
