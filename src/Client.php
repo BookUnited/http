@@ -87,10 +87,6 @@ class Client implements ClientInterface
      */
     private function request(string $method, string $uri, array $headers = [], array $body = []): array
     {
-        if ($method === self::GET) {
-            $body['query'] = $body;
-        }
-
         switch ($method) {
             case self::GET:
                 $body['query'] = $body;
@@ -103,7 +99,7 @@ class Client implements ClientInterface
         $request = new Request($method, $uri, $headers, $body);
 
         foreach ($this->middlewares as $middleware) {
-            $middleware->handle($request);
+            $request = $middleware->handle($request);
         }
 
         try {
