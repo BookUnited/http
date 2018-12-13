@@ -1,6 +1,6 @@
 <?php
 
-namespace BookUnited\Http;
+namespace BookUnited\Http\Exceptions;
 
 use Exception;
 
