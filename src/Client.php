@@ -87,10 +87,6 @@ class Client implements ClientInterface
      */
     private function request(string $method, string $uri, array $headers = [], array $body = []): array
     {
-        if ($method === self::GET) {
-            $body['query'] = $body;
-        }
-
         switch ($method) {
             case self::GET:
                 $body['query'] = $body;
