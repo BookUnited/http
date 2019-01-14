@@ -13,8 +13,8 @@ interface ClientInterface
 
     /**
      * @param string $uri
-     * @param array $payload
+     * @param array $parameters
      * @return array
      */
-    public function post(string $uri, array $payload = []): array;
+    public function post(string $uri, array $parameters = []): array
 }

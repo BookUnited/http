@@ -65,39 +65,28 @@ class Client implements ClientInterface
      */
     public function get(string $uri, array $parameters = []): array
     {
-        return $this->request(self::GET, $uri, [], $parameters);
+        return $this->request(self::GET, $uri, [], ['query' => $parameters]);
     }
 
     /**
-     * @param string $uri
-     * @param array $payload
-     * @return array
+     * @inheritdoc
      */
-    public function post(string $uri, array $payload = []): array
+    public function post(string $uri, array $parameters = []): array
     {
-        return $this->request(self::POST, $uri, [], $payload);
+        return $this->request(self::POST, $uri, [], [
+            'form_params' => $parameters,
+        ]);
     }
 
     /**
      * @param string $method
      * @param string $uri
      * @param array $headers
-     * @param array $body
+     * @param array $options
      * @return array
      */
-    private function request(string $method, string $uri, array $headers = [], array $body = []): array
+    private function request(string $method, string $uri, array $headers = [], array $options = []): array
     {
-        $options = [];
-
-        switch ($method) {
-            case self::GET:
-                $options['query'] = $body;
-                break;
-            case self::POST:
-                $options['form_params'] = $body;
-                break;
-        }
-
         $request = new Request($method, $uri, $headers);
 
         foreach ($this->middlewares as $middleware) {
