@@ -16,5 +16,5 @@ interface ClientInterface
      * @param array $parameters
      * @return array
      */
-    public function post(string $uri, array $parameters = []): array
+    public function post(string $uri, array $parameters = []): array;
 }

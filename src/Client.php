@@ -90,7 +90,7 @@ class Client implements ClientInterface
         $request = new Request($method, $uri, $headers);
 
         foreach ($this->middlewares as $middleware) {
-            $middleware->handle($request);
+            $request = $middleware->handle($request);
         }
 
         try {
