@@ -87,23 +87,25 @@ class Client implements ClientInterface
      */
     private function request(string $method, string $uri, array $headers = [], array $body = []): array
     {
+        $options = [];
+
         switch ($method) {
             case self::GET:
-                $body['query'] = $body;
+                $options['query'] = $body;
                 break;
             case self::POST:
-                $body['form_params'] = $body;
+                $options['form_params'] = $body;
                 break;
         }
 
-        $request = new Request($method, $uri, $headers, $body);
+        $request = new Request($method, $uri, $headers);
 
         foreach ($this->middlewares as $middleware) {
-            $request = $middleware->handle($request);
+            $middleware->handle($request);
         }
 
         try {
-            $response = $this->httpClient->send($request);
+            $response = $this->httpClient->send($request, $options);
             return $this->responseHandler->handle($response);
         } catch (ClientException $e) {
             $this->errorResponseHandler->handle($e->getResponse());
