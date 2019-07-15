@@ -12,7 +12,6 @@ class JsonRequestMiddleware implements MiddlewareInterface
     public function handle(RequestInterface $request): RequestInterface
     {
         return $request
-            ->withAddedHeader('Content-Type', 'application/json')
             ->withAddedHeader('Accept', 'application/json');
     }
 }
