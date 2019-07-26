@@ -16,9 +16,9 @@ class ErrorResponseHandler implements ErrorResponseHandlerInterface
         $errors = json_decode($response->getBody()->getContents(), true);
 
         if ($response->getStatusCode() === 422) {
-            throw new ValidationException('Validation errors', $errors);
+            throw new ValidationException('Validation errors', 422, $errors);
         }
 
-        throw new ClientException('500 error! Something is very wrong!');
+        throw new ClientException($response->getBody()->getContents(), $response->getStatusCode());
     }
 }
