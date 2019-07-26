@@ -11,16 +11,18 @@ class ClientException extends Exception
 
     /**
      * @param string $message
-     * @param array $errors
+     * @param int    $code
+     * @param array  $errors
      */
     public function __construct(
         string $message,
+        int $code,
         array $errors = []
     )
     {
         $this->errors = $errors;
 
-        parent::__construct($message);
+        parent::__construct($message, $code);
     }
 
     /**

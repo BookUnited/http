@@ -16,7 +16,6 @@ class JsonRequestMiddlewareTest extends TestCase
         $middleware = new JsonRequestMiddleware();
         $request = $middleware->handle($request);
 
-        $this->assertEquals('application/json', $request->getHeaderLine('Content-Type'));
         $this->assertEquals('application/json', $request->getHeaderLine('Accept'));
     }
 }
