@@ -2,15 +2,12 @@
 
 namespace BookUnited\Http\ResponseHandlers;
 
-use BookUnited\Http\ClientException;
-use Psr\Http\Message\ResponseInterface;
+use GuzzleHttp\Exception\ClientException;
 
 interface ErrorResponseHandlerInterface
 {
     /**
-     * @param ResponseInterface $response
-     * @return void
-     * @throws ClientException
+     * @param ClientException $clientException
      */
-    public function handle(ResponseInterface $response): void;
+    public function handle(ClientException $clientException): void;
 }

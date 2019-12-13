@@ -81,9 +81,10 @@ class Client implements ClientInterface
     /**
      * @param string $method
      * @param string $uri
-     * @param array $headers
-     * @param array $options
+     * @param array  $headers
+     * @param array  $options
      * @return array
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     private function request(string $method, string $uri, array $headers = [], array $options = []): array
     {
@@ -96,8 +97,8 @@ class Client implements ClientInterface
         try {
             $response = $this->httpClient->send($request, $options);
             return $this->responseHandler->handle($response);
-        } catch (ClientException $e) {
-            $this->errorResponseHandler->handle($e->getResponse());
+        } catch (ClientException $clientException) {
+            $this->errorResponseHandler->handle($clientException);
         }
     }
 }
