@@ -5,6 +5,8 @@ namespace BookUnited\Http\Tests\ResponseHandlers;
 use BookUnited\Http\Exceptions\ClientException;
 use BookUnited\Http\ResponseHandlers\ErrorResponseHandler;
 use BookUnited\Http\Exceptions\ValidationException;
+use GuzzleHttp\Exception\ClientException as GuzzleClientException;
+use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 
@@ -14,7 +16,11 @@ class ErrorResponseHandlerTest extends TestCase
     {
         $this->expectException(ClientException::class);
 
-        $response = new Response(500);
+        $response = new GuzzleClientException(
+            'Server error',
+            new Request('GET', '/'),
+            new Response(500)
+        );
 
         $handler = new ErrorResponseHandler();
         $handler->handle($response);
@@ -30,7 +36,11 @@ class ErrorResponseHandlerTest extends TestCase
             ],
         ];
 
-        $response = new Response(422, [], json_encode($body));
+        $response = new GuzzleClientException(
+            'Validation error',
+            new Request('POST', '/'),
+            new Response(422, [], json_encode($body))
+        );
 
         $handler = new ErrorResponseHandler();
 
